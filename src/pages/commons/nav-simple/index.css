@@ -1,0 +1,17 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-05 11:00:15
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-05 11:07:52
+*/
+.nav-simple{
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+}
+.nav-simple .logo{
+	font-size: 26px;
+	font-weight: bold;
+	color: #c60023;
+}

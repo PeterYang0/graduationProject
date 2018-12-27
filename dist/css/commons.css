@@ -1,0 +1,140 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-12-26 11:12:11
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-12-26 11:14:35
+*/
+/* 公共部分 */
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #f6f6f6;
+	font: 12px/1.5 tahoma,arial,Microsoft YaHei,sans-serif;
+}
+li{
+	list-style: none;
+}
+img{
+	display: block;
+	border: none;
+}
+label{
+	cursor: pointer;
+}
+input[type='checkbox']{
+	cursor: pointer;
+}
+/* 定宽布局 */
+.w{
+	width: 1080px;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+	/* 不仅清除超出还可以清除浮动 */
+}
+.crumb{
+	height: 50px;
+	line-height: 50px;
+	color: #888;
+	background: #eee;
+	font-size: 14px;
+	border-top: 2px solid #c60023;
+}
+.panel{
+	padding: 10px;
+	margin-bottom: 10px;
+	background: #fff;
+}
+.panel .panel-title{
+	padding: 10px;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	border-bottom: 1px solid #eee;
+}
+.panel .panel-body{
+	padding: 10px;
+	overflow: hidden;
+}
+/* 全局通用样式 */
+.hide{
+	display: none;
+}
+/* 超链接的样式 */
+.link{
+	color: #999;
+	cursor: pointer;
+	text-decoration: none;
+}
+.link:hover{
+	color: #e80012;
+}
+.link-text{
+	color: #999;
+	text-decoration: none;
+}
+/* 按钮 */
+.btn{
+	display: inline-block;
+	padding: 0 20px;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	border: none;
+	background: #c60023;
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+}
+.btn-mini{
+	height: 25px;
+	line-height: 25px;
+	font-size: 12px;
+	padding: 0 10px;
+}
+/* loading */
+.loading{
+	margin: 10px auto;
+	width: 100px;
+	height: 100px;
+	display: block;
+	background: url(/dist/images/loading.gif) no-repeat;
+	background-size: 100% 100%;
+	opacity: 0.1;
+}
+.errtips{
+	height: 60px;
+	line-height: 60px;
+	background: #eee;
+	color: #f60;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+}/*
+* @Author: 羊驼
+* @Date:   2018-05-05 12:16:50
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-05 12:21:33
+*/
+.footer{
+	padding-bottom: 10px;
+}
+.footer .links{
+	text-align: center;
+	color: #666;
+	line-height: 30px;
+}
+.footer .links .link{
+	margin: 0 10px;
+}
+.footer .copyright{
+	text-align: center;
+	color: #666;
+	line-height: 30px;
+}

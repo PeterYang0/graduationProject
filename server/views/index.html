@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>首页—mmall_yangtuo</title>
+	<link rel="stylesheet" href="">
+	<link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/public/css/admin.css" rel="stylesheet">
+<body>
+	<div id="topNav">
+        <span class="logo">YANGTUO</span>   
+        <span class="title">有机农产品销售网站后台管理系统</span>
+        <div class="user">
+            <a class="user-box">
+                <i class="fa fa-user fa-fw"></i><span>欢迎 {{userInfo.username}}</span>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="logoutBox">
+                <a>
+                    <i class="fa fa-sign-out fa-fw"></i>
+                     退出登录
+                 </a>
+            </div>
+        </div>
+    </div>
+    <div id="sideNav">
+        <ul>
+            <li class="selectActive">
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>                
+                <a href="/admin/product"> 
+                    <i class="fa fa-list"></i>
+                    <span>商品管理</span>
+                </a>
+           </li>
+            <li>
+                <a href="/admin/productCat"> 
+                    <i class="fa fa-list"></i>
+                    <span>分类管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    <span>会员管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                    <span>订单管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>促销管理</span> 
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="pageWrap">
+        <h3>欢迎进入后台管理系统！</h1>
+        <div class="row content">
+            <div class="col-md-4">
+                <a class="color-box blue" href="/admin/user">
+                    <p class="count">{{userCount}}</p><p class="desc">
+                        <i class="fa fa-user-o"></i><span>用户总数</span>
+                    </p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a class="color-box red" href="/admin/product">
+                    <p class="count">{{productCount}}</p>
+                    <p class="desc">
+                        <i class="fa fa-list"></i><span>商品总数</span>
+                    </p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a class="color-box green" href="#/order">
+                    <p class="count">3840</p><p class="desc">
+                        <i class="fa fa-check-square-o"></i><span>订单总数</span>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+	
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/js/admin.js"></script>
+
+</body></html>

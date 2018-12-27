@@ -1,0 +1,30 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-05 15:37:49
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-11 16:54:39
+*/
+.header .logo{
+	position: absolute;
+	display: block;
+	font-size: 36px;
+	color: #c60023;
+	font-weight: bold;
+	left: 35px;
+	top: 35px;
+}
+.header .search-con{
+	padding: 40px 0 30px 250px;
+}
+.header .search-con .search-input{
+	width: 550px;
+	height: 40px;
+	line-height: 40px;
+	padding-left: 10px;
+	font-size: 15px;
+	border: 2px solid #c60023;
+}
+.header .search-con .search-btn{
+	position: absolute;
+	height: 44px;
+}

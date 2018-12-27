@@ -1,0 +1,22 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-05 12:16:50
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-05 12:21:33
+*/
+.footer{
+	padding-bottom: 10px;
+}
+.footer .links{
+	text-align: center;
+	color: #666;
+	line-height: 30px;
+}
+.footer .links .link{
+	margin: 0 10px;
+}
+.footer .copyright{
+	text-align: center;
+	color: #666;
+	line-height: 30px;
+}

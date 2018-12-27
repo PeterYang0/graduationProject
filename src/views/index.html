@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%= require('html-loader!./layout/head-common.html')  %>
+	<title><%= htmlWebpackPlugin.options.title %>-有机农产品</title>
+</head>
+<body>
+	<%= require('html-loader!./layout/nav.html')  %>
+	<%= require('html-loader!./layout/header.html')  %>
+	<div class="w">
+		<div class="lunbo">
+			<ul class="imgUl">
+				<li><img src="${require(`../imgs/lunbo/1.jpg`)}" alt=""></li>
+				<li><img src="${require(`../imgs/lunbo/2.jpg`)}" alt=""></li>
+				<li><img src="${require(`../imgs/lunbo/3.jpg`)}" alt=""></li>
+			</ul>
+			<ul class="crileUl">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<div class="preNext pre"></div>
+			<div class="preNext next"></div>
+		</div>
+	</div>
+	<%= require('html-loader!./layout/footer.html')  %>
+</body>
+</html>

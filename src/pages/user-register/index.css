@@ -1,0 +1,83 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-06 22:13:43
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-07 12:56:25
+*/
+.page-wrap{
+	background: #e72955;
+	padding: 40px 0;
+}
+.user-con{
+	width: 400px;
+	margin: auto;
+	position: relative;
+	background: #fff;
+}
+.user-con .user-title{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	color: #666;
+	padding: 10px 0;
+}
+.user-con .user-box{
+	padding: 20px;
+}
+.user-con .user-box .error-item{
+	position: relative;
+	padding: 4px 0 4px 40px;
+	border: 1px solid red;
+	color: red;
+	background: #fde9e9;
+	margin-bottom: 10px;
+	display: none;
+}
+.user-con .user-box .error-item .error-icon{
+	position: absolute;
+	left: 14px;
+	top: 50%;
+	font-size: 14px;
+	margin-top: -7px;
+}
+.user-con .user-box .user-item{
+	position: relative;
+	margin-bottom: 15px;
+}
+.user-con .user-box .user-item .user-label{
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	bottom: 1px;
+	width: 40px;
+	line-height: 36px;
+	background: #f3f3f3;
+	font-size: 18px;
+	color: #d3d3d3;
+	text-align: center;
+	border-right: 1px solid #bdbdbd;
+}
+.user-con .user-box .user-item .user-content{
+	padding: 10px 0 10px 50px;
+	width: 308px;
+	height: 18px;
+	line-height: 18px;
+	border: 1px solid #bdbdbd;
+}
+.user-con .btn-submit{
+	margin-left: 130px
+}
+.user-con .link-item{
+	text-align: right;
+	margin-top: 10px;
+}
+.user-con .link-item .link{
+	color: #666;
+	margin-left: 10px;
+}
+.user-con .link-item .link:hover {
+
+    color: #e80012;
+
+}

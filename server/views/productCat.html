@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>首页—mmall_yangtuo</title>
+	<link rel="stylesheet" href="">
+	<link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/public/css/admin.css" rel="stylesheet">
+<body>
+	<div id="topNav">
+        <span class="logo">YANGTUO</span>   
+        <span class="title">有机农产品销售网站后台管理系统</span>
+        <div class="user">
+            <a class="user-box">
+                <i class="fa fa-user fa-fw"></i><span>欢迎 {{userInfo.username}}</span>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="logoutBox">
+                <a>
+                    <i class="fa fa-sign-out fa-fw"></i>
+                     退出登录
+                 </a>
+            </div>
+        </div>   
+    </div>
+    <div id="sideNav">
+        <ul>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>                
+                <a href="/admin/product"> 
+                    <i class="fa fa-list"></i>
+                    <span>商品管理</span>
+                </a>
+           </li>
+            <li class="selectActive">
+                <a href="/admin/productCat"> 
+                    <i class="fa fa-list"></i>
+                    <span>分类管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/user">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    <span>会员管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                    <span>订单管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>促销管理</span> 
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="pageWrap">
+        <h1>商品列表</h1>
+        <div class="addProduct">
+            <a class="btn btn-primary addProductCat">
+                <i class="fa fa-plus"></i>
+                <span>添加分类</span>
+            </a>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>分类ID</th>
+                    <th>分类信息</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for productCat in productCats %}
+                <tr>
+                    <td>{{productCat._id.toString()}}</td>
+                    <td>{{productCat.productCat}}</td>
+                    <td>
+                        <a class="editProductCat" data-cat='{{productCat.productCat}}' data-id='{{productCat._id.toString()}}'>编辑</a>|
+                        <a class="deleteProductCat" data-id='{{productCat._id.toString()}}'>删除</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+	
+	<script src="/public/js/jquery.js"></script>
+	<script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/js/admin.js"></script>
+
+    <script>
+        $(function(){
+            //添加分类
+            $(document).on('click', '.addProductCat', function(event) {
+                var name=prompt("请输入分类名称。");
+                var data={
+                    productCat:name
+                };
+                if (name) {
+                    $.ajax({ 
+                        type: "POST", //提交方式 
+                        url : "/admin/addProductCat",//路径
+                        data:data,
+                        success : function(res) {//返回数据根据结果进行相应的处理 
+                            alert(res.msg);
+                            window.location.reload();
+                        },
+                        error:function(){
+                            alert('添加失败失败')
+                        }
+                    }); 
+                }else{
+                    alert('分类名不能为空')
+                }
+            });
+            //删除分类
+            $(document).on('click', '.deleteProductCat', function(event) {
+                var con=window.confirm("确定要删除吗?"); 
+                var data={
+                    id:$(this).data('id')
+                };
+                if (con&&data) {
+                    $.ajax({ 
+                        type: "POST", //提交方式 
+                        url : "/admin/deleteProductCat",//路径
+                        data:data,
+                        success : function(res) {//返回数据根据结果进行相应的处理 
+                            alert(res.msg);
+                            window.location.reload();
+                        },
+                        error:function(){
+                            alert('添加失败失败')
+                        }
+                    }); 
+                }
+            });
+            //编辑分类
+            $(document).on('click', '.editProductCat', function(event) {
+                var defaultCat=$(this).data('cat');
+                var name=prompt("请输入分类名称。",defaultCat);
+                var id=$(this).data('id');
+                var data={
+                    productCat:name,
+                    id:id
+                };
+                if (name) {
+                    $.ajax({ 
+                        type: "POST", //提交方式 
+                        url : "/admin/editProductCat",//路径
+                        data:data,
+                        success : function(res) {//返回数据根据结果进行相应的处理 
+                            alert(res.msg);
+                            window.location.reload();
+                        },
+                        error:function(){
+                            alert('添加失败失败')
+                        }
+                    }); 
+                }else{
+                    alert('分类名不能为空')
+                }
+            });
+        })
+        
+    </script>
+
+</body></html>
