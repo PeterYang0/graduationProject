@@ -31,6 +31,8 @@ module.exports = {
     'user-login'      :   ['./src/pages/user-login/index.js'],
     'user-register'   :   ['./src/pages/user-register/index.js'],
     'result'          :   ['./src/pages/result/index.js'],
+    'detail'          :   ['./src/pages/detail/index.js'],
+    'cart'          :   ['./src/pages/cart/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -97,8 +99,11 @@ module.exports = {
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', '注册')),
         new HtmlWebpackPlugin(getHtmlConfig('result', '结果')),
-	   //处理css文件
-  		new ExtractTextPlugin("css/[name].css"),
+        new HtmlWebpackPlugin(getHtmlConfig('detail', '商品详情')),
+        new HtmlWebpackPlugin(getHtmlConfig('cart', '购物车')),
+
+	      //处理css文件
+  		  new ExtractTextPlugin("css/[name].css"),
         //处理公共文件
         new webpack.optimize.CommonsChunkPlugin({
             name: 'commons',
@@ -106,6 +111,10 @@ module.exports = {
             filename: 'js/commons.js',
             // (the filename of the commons chunk)
         }),
+        new webpack.ProvidePlugin({
+          　　$: "jquery",
+          　　jQuery: "jquery"
+          })
     ],
     devServer: {
       port:8089,

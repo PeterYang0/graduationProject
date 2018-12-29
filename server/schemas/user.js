@@ -25,10 +25,7 @@ module.exports = new mongoose.Schema({
 	orderList:Array,
 	cartList:[
 		{
-			product:{
-				type:mongoose.Schema.Types.ObjectId,
-				ref:'product'
-			},
+			product:Object,
 			checked:{
 				type:Boolean,
 				default:true

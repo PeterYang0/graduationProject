@@ -1,0 +1,18 @@
+{{#products}}
+	<li class="p-item">
+		<div class="p-img-con">
+			<a class="link" href="./detail.html?productId={{_id}}" target="_blank">
+				<img class="p-img" src="../../../server/upload/{{productUrl}}" alt='{{productName}}'/>
+			</a>
+		</div>
+		<div class="p-price-con">
+			<span class="p-price">￥{{productPrice}}</span>
+		</div>
+		<div class="p-name-con">
+			<a href="./detail.html?productId={{_id}}" class="p-name" target="_blank">{{productName}}</a>
+		</div>
+	</li>
+{{/products}}
+{{^products}}
+	<p class='errtips'>未找到该商品</p>
+{{/products}}

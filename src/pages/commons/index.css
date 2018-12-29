@@ -41,6 +41,7 @@ input[type='checkbox']{
 	background: #eee;
 	font-size: 14px;
 	border-top: 2px solid #c60023;
+	margin-top: 125px;
 }
 .panel{
 	padding: 10px;

@@ -26,5 +26,5 @@ module.exports = new mongoose.Schema({
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'productCat'
 	},
-	productCount:String
+	productCount:Number
 });
