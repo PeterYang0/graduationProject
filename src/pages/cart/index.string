@@ -60,7 +60,7 @@
 				<span class="count-btn plus">+</span>
 			</th>
 			<th class="cart-cell cell-total">
-				￥{{productTotalPrice}}
+				￥{{totalPrice}}
 			</th>
 			<th class="cart-cell cell-opera">
 				<span class="link cart-delete">删除</span>
@@ -71,7 +71,7 @@
 </div>
 <div class="cart-footer">
 	<div class="select-con">
-		<!-- <label>
+		<label>
 			{{#allChecked}}
             <input type="checkbox" class="cart-select-all" checked/>
             {{/allChecked}}
@@ -79,7 +79,7 @@
             <input type="checkbox" class="cart-select-all" />
             {{/allChecked}}
 			<span>全选</span>
-		</label> -->
+		</label>
 	</div>
 	<div class="delete-con">
 		<span class="link delete-selected">

@@ -11,6 +11,7 @@ import _mm from 'util/mm.js';
 import _product from 'service/product-service.js';
 import _cart from 'service/cart-service.js';
 import template from './index.string';
+import _nav from 'pages/commons/nav/index.js';
 
 var page={
 	data:{
@@ -32,13 +33,13 @@ var page={
 			var productId=$(this).parents('.cart-table').data('prodcut_id');
 			if ($this.is(':checked')) {
 				_cart.selectProduct(productId,function(res){
-					_this.renderCart(res);
+					_this.renderCart(res.data);
 				},function(){
 					$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 				})
 			}else{
 				_cart.unselectProduct(productId,function(res){
-					_this.renderCart(res)
+					_this.renderCart(res.data)
 				},function(){
 					$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 				})
@@ -49,13 +50,13 @@ var page={
 			var $this=$(this);
 			if ($(this).is(':checked')) {
 				_cart.selectAllProduct(function(res){
-					_this.renderCart(res)
+					_this.renderCart(res.data)
 				},function(){
 					$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 				})
 			}else{
 				_cart.unselectAllProduct(function(res){
-					_this.renderCart(res)
+					_this.renderCart(res.data)
 				},function(){
 					$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 				})
@@ -87,7 +88,7 @@ var page={
 				productId:productId,
 				count:newCount
 			},function(res){
-				_this.renderCart(res)
+				_this.renderCart(res.data)
 			},function(err){
 				$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 			})
@@ -127,30 +128,40 @@ var page={
 	delete:function(productIds){
 		var _this=this;
 		_cart.deleteProduct(productIds,function(res){
-			_this.renderCart(res)
+			_this.renderCart(res.data)
 		},function(){
 			$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 		})
 	},
-	loadCart:function(){
+	loadCart:function(){//加载购物车列表
 		var _this=this;
 		_cart.getCartList(function(res){
-			console.log(res)
 			_this.renderCart(res.data);
 		},function(err){
 			$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 		})
 	},
-	renderCart:function(data){
+	renderCart:function(data){//购物车页面
 		this.filter(data);
 		console.log(data)
 		var CartHtml=_mm.renderHtml(template,data);
 		$('.page-wrap').html(CartHtml);
 		//修改导航条购物车数量
-		// _nav.loadCartCount();
+		_nav.loadCartCount();
 	},
 	filter:function(data){
 		data.NotEmpty=!!data.cartList.length;
+		data.cartTotalPrice = 0;
+		data.allChecked = true;
+		data.cartList.forEach(function(item){
+			item.totalPrice = parseInt(item.product.productPrice) * item.productNum;
+			if (!item.checked) {
+				data.allChecked = false;
+			} else {
+				data.cartTotalPrice += item.totalPrice;
+			}
+		});
+		console.log(data)
 	},
 
 }

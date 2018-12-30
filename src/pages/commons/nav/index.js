@@ -11,12 +11,13 @@ import $ from 'jquery';
 //引入jq.cookie插件
 import 'util/jquery.cookie.js';
 import _user   from 'service/user-service.js';
+import _cart from 'service/cart-service.js';
 // // 导航
 var nav = {
     init : function(){
         this.bindEvent();
         this.loadUserInfo();
-        // this.loadCartCount();
+        this.loadCartCount();
         return this;
     },
     bindEvent : function(){
@@ -56,8 +57,8 @@ var nav = {
                     $('.isAdmin').hide();
                 }
                 //加载购物车数量
-                var cartListCount=res.data.cartList.length;
-                $('.nav .cart-count').text(cartListCount);
+                
+                
             },function(err){
                 alert('请求出错')
             })
@@ -65,5 +66,13 @@ var nav = {
             $('.user.not-login').show().siblings('.user.login').hide()
         };
     },
+    loadCartCount:function () {
+        _cart.getCartCount(function (res) {
+            var cartListCount = res.data.cartCount;
+            $('.nav .cart-count').text(cartListCount);
+        },function(err){
+            alert('网络出错')
+        });
+    }
 };
-nav.init();
+module.exports = nav.init();
