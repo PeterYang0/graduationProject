@@ -115,11 +115,12 @@ var page={
 		};
 	},
 	addressfilter:function(res){
+		console.log(res)
 		if (this.data.selectAdressId) {
 			var flg=false;
-			for (var i = 0; i < res.adressId.length; i++) {
-				if (res.adressId[i].id==this.data.selectAdressId) {
-					res.adressId[i].isActive=true;
+			for (var i = 0; i < res.data.adressList.length; i++) {
+				if (res.data.adressList[i].adressId==this.data.selectAdressId) {
+					res.data.adressList[i].isActive=true;
 					flg=true;
 				}
 			};
