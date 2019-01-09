@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>首页—mmall_yangtuo</title>
+	<link rel="stylesheet" href="">
+	<link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/jqueryPagination/css/jquery.pagination.css" />
+    <link href="/public/css/admin.css" rel="stylesheet">
+<body>
+	<div id="topNav">
+        <span class="logo">YANGTUO</span>   
+        <span class="title">有机农产品销售网站后台管理系统</span>
+        <div class="user">
+            <a class="user-box">
+                <i class="fa fa-user fa-fw"></i><span>欢迎 {{userInfo.username}}</span>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="logoutBox">
+                <a>
+                    <i class="fa fa-sign-out fa-fw"></i>
+                     退出登录
+                 </a>
+            </div>
+        </div>
+    </div>
+    <div id="sideNav">
+        <ul>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>                
+                <a href="/admin/product"> 
+                    <i class="fa fa-list"></i>
+                    <span>商品管理</span>
+                </a>
+           </li>
+            <li>
+                <a href="/admin/productCat"> 
+                    <i class="fa fa-list"></i>
+                    <span>分类管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/user">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    <span>会员管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/order">
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                    <span>订单管理</span>
+                </a>
+            </li>
+            <li class="selectActive">
+                <a href="/admin/discount">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>促销管理</span> 
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="pageWrap">
+        <h1>商品列表</h1>
+        <div class="form-inline">
+            <form action="/admin/discount" method="get">
+                <input type="text" class="form-control" name='productName' placeholder="关键字">
+                <input type="submit" value="搜索" class="btn btn-primary">
+            </form>
+            <form action="/admin/discountProduct" method="GET">
+                <input type="submit" value="促销商品" class="btn btn-primary" class="discountProduct">
+            </form>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>商品ID</th>
+                    <th>商品信息</th>
+                    <th>图片</th>
+                    <th>分类</th>
+                    <th>价格</th>
+                    <th>库存</th>
+                    <th>折扣</th>
+                    <th>现价</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{product._id.toString()}}</td>
+                    <td>{{product.productName}}</td>
+                    <td>
+                        <img class="productImg" src="../upload/{{product.productUrl.substr(7)}}" alt="图片">
+                    </td>
+                    <td>{{product.productCat.productCat}}</td>
+                    <td>￥{{product.productPrice}}</td>
+                    <td>{{product.productCount}}Kg</td>
+                    <td>
+                        {% if product.productDiscount==10 %}
+                        <span class="discount hide">{{product.productDiscount}}折</span><br />
+                        {% else %}
+                        <span class="discount">{{product.productDiscount}}折</span><br />
+                        {% endif %}
+                        <button class="editDiscount" data-id={{product._id.toString()}} data-discount={{product.productDiscount}}>编辑折扣</button>
+                    </td>
+                    <td class="productNowprice">{{product.productNowprice}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- 分页插件 -->
+        <div id="pagination1" class="page"></div>
+
+    </div>
+
+	
+	<script src="/public/js/jquery.js"></script>
+    <script src="/public/jqueryPagination/js/jquery.pagination.min.js"></script>
+	<script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/js/admin.js"></script>
+
+    <script>
+        $(function(){
+            //编辑折扣
+            $(document).on('click', '.editDiscount', function(event) {
+                $this= $(this);
+                var discount =  $(this).data('discount');
+                var newDiscount = prompt("请输入折扣。", discount);
+                var data={
+                    id:$(this).data('id'),
+                    newDiscount: newDiscount
+                };
+                newDiscount=parseInt(newDiscount);
+                if (newDiscount) {
+                    if (newDiscount > 0 && newDiscount <= 10) {
+                        $.ajax({
+                            type: "post", //提交方式 
+                            url: "/admin/editDiscount",//路径
+                            data: data,
+                            success: function (res) {//返回数据根据结果进行相应的处理
+                                $this.siblings('.discount').html(res.data.discount+'折');
+                                $this.parent().siblings('.productNowprice').html(res.data.productNowprice);
+                                if (res.data.discount==10) {
+                                    $this.siblings('.discount').addClass('hide');
+                                }else{
+                                    $this.siblings('.discount').removeClass('hide');
+                                }
+                            },
+                            error: function () {
+                                alert('失败')
+                            }
+                        });
+                    } else {
+                        alert('请输入有效折扣')
+                    };
+                };
+            });
+            //折扣商品
+
+            //初始化分页插件
+            $("#pagination1").pagination({
+                currentPage: {{current}},
+                totalPage: {{totalPage}},
+                callback: function(current) {
+                    window.location.href='/admin/discount?pageSize=4&current='+current;
+                }
+            });
+        })
+    </script>
+
+</body></html>

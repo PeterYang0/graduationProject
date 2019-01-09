@@ -1,0 +1,66 @@
+<div class="module close">
+	<div class="panel">
+		{{#isUpdate}}
+		<div class="panel-title">
+			编辑地址
+			<i class="fa fa-close close"></i>
+		</div>
+		{{/isUpdate}}
+		{{^isUpdate}}
+		<div class="panel-title">
+			使用新地址
+			<i class="fa fa-close close"></i>
+		</div>
+		{{/isUpdate}}
+		<div class="panel-body module-con">
+			<div class="form">
+				<div class="from-inline">
+					<label class="label" for="receiver-name">
+						<span class="require">*</span>
+						收件人姓名：
+					</label>
+					<input type="text" class="from-item name" id="receiver-name" placeholder="请输入用户名" value="{{data.receiverName}}">
+				</div>
+				<div class="from-inline">
+					<label class="label" for="receiver-province">
+						<span class="require">*</span>
+						所在城市：
+					</label>
+					<select class="from-item province-select" id="receiver-province">
+						<option value="">请选择</option>
+					</select>
+					<select class="from-item city-select" id="receiver-city">
+						<option value="">请选择</option>
+					</select>
+				</div>
+				<div class="from-inline">
+					<label class="label" for="receiver-adress">
+						<span class="require">*</span>
+						详细地址：
+					</label>
+					<input type="text" class="from-item adress" id="receiver-adress" placeholder="请精确到门牌号" value="{{data.receiverAdress}}">
+				</div>
+				<div class="from-inline">
+					<label class="label" for="receiver-phone">
+						<span class="require">*</span>
+						收件人手机：
+					</label>
+					<input type="text" class="from-item phone" id="receiver-phone" placeholder="请输入11位手机号码" value="{{data.receiverPhone}}">
+				</div>
+				<div class="from-inline">
+					<label class="label" for="receiver-zip"> 
+						<span class="require">*</span>
+						邮政编码：
+					</label>
+					<input type="text" class="from-item zip" id="receiver-zip" placeholder="如 100000" value="{{data.receiverZip}}">
+				</div>
+				<div class="from-inline">
+					<label class="label">
+						&nbsp;
+					</label>
+					<a class="btn adress-save" data-xid='{{data.adressId}}'>保存收货地址</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,66 @@
+<div class="panel">
+	<div class="panel-title">
+		订单信息
+	</div>
+	<div class="panel-body">
+		<div class="order-info">
+			<div class="info-line">
+				 <span class="text">订单号：{{order.orderId}}</span>
+				 <span class="text">创建时间：{{order.orderCreateTime}} </span>
+			</div>
+			<div class="info-line">
+				<span class="text">
+					收件人：{{order.orderAdress.receiverName}} {{order.orderAdress.receiverProvince}} {{order.orderAdress.receiverCity}} {{order.orderAdress.receiverAdress}} 
+				</span>
+			</div>
+			<div class="info-line">
+				<span class="text">订单状态：{{order.orderStatusDec}} </span>
+			</div>
+			<div class="info-line">
+				<span class="text">支付方式：{{order.orderPayment}}</span>
+			</div>
+			<div class="info-line">
+				{{#needPay}}
+				<a class="btn pay-btn" href="./payment.html?orderNum={{order.orderId}}">去支付</a>
+				{{/needPay}}
+				{{#isCancel}}
+				<a class="btn cancel-btn">取消订单</a>
+				{{/isCancel}}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel">
+	<div class="panel-title">
+		商品清单
+	</div>
+	<div class="panel-body">
+		
+		<table class="order-list-table orderHeader">
+			<tr>
+				<th class="cell cell-img">&nbsp;</th>
+				<th class="cell cell-info">商品信息</th>
+				<th class="cell cell-price">单价</th>
+				<th class="cell cell-count">数量</th>
+				<th class="cell cell-total">小计</th>
+			</tr>
+		</table>
+		<table class="order-list-table">
+			{{#order.orderProduct}}
+			<tr>
+				<td class="cell cell-img">
+					<a href="detail.html?productId={{product.productId}}" target="_blank">
+						<img src="../../../server/upload/{{product.productUrl}}" alt="{{product.productName}}" class="p-img">
+					</a>
+				</td>
+				<td class="cell cell-info">
+					<a href="detail.html?productId={{product._id}}" class="link" target="_blank">{{product.productName}}</a>
+				</td>
+				<td class="cell cell-price">￥{{product.productNowprice}}</td>
+				<td class="cell cell-count">{{productNum}}</td>
+				<td class="cell cell-total">￥{{totalPrice}}</td>
+			</tr>
+			{{/order.orderProduct}}
+		</table>
+	</div>
+</div>

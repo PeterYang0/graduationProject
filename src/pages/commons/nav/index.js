@@ -68,8 +68,13 @@ var nav = {
     },
     loadCartCount:function () {
         _cart.getCartCount(function (res) {
-            var cartListCount = res.data.cartCount;
-            $('.nav .cart-count').text(cartListCount);
+            if(res.code==10){
+                _mm.doLogin();
+            }else{
+                var cartListCount = res.data.cartCount;
+                $('.nav .cart-count').text(cartListCount);
+            }
+            
         },function(err){
             alert('网络出错')
         });

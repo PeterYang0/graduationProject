@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页—mmall_yangtuo</title>
+    <link rel="stylesheet" href="">
+    <link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/public/css/admin.css" rel="stylesheet">
+
+<body>
+    <div id="topNav">
+        <span class="logo">YANGTUO</span>
+        <span class="title">有机农产品销售网站后台管理系统</span>
+        <div class="user">
+            <a class="user-box">
+                <i class="fa fa-user fa-fw"></i><span>欢迎 {{userInfo.username}}</span>
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="logoutBox">
+                <a>
+                    <i class="fa fa-sign-out fa-fw"></i>
+                    退出登录
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="sideNav">
+        <ul>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/product">
+                    <i class="fa fa-list"></i>
+                    <span>商品管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/productCat">
+                    <i class="fa fa-list"></i>
+                    <span>分类管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/user">
+                    <i class="fa fa-user-o fa-fw"></i>
+                    <span>会员管理</span>
+                </a>
+            </li>
+            <li class="selectActive">
+                <a href="/admin/order">
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                    <span>订单管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/discount">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span>促销管理</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="pageWrap">
+        <h1>订单详情</h1>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">商品名称</label>
+                    <div class="col-md-5">
+                        <p class="form-control">{{order.orderId}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">创建时间</label>
+                    <div class="col-md-5">
+                        <p class="form-control">{{order.localeTime}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">收件人</label>
+                    <div class="col-md-5">
+                        <p class="form-control">
+                            {{order.orderAdress.receiverName}},
+                            {{order.orderAdress.receiverProvince}} ,
+                            {{order.orderAdress.receiverCity}} ,
+                            {{order.orderAdress.receiverAdress}}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">订单状态</label>
+                    <div class="col-md-5">
+                        <p class="form-control">
+                            {{order.orderStatusDec}}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">支付方式</label>
+                    <div class="col-md-5">
+                        <p class="form-control">{{order.orderPayment}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">订单金额</label>
+                    <div class="col-md-5">
+                        <p class="form-control">￥{{order.orderTotalPrice}}</p>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="15%">商品图片</th>
+                        <th width="40%">商品信息</th>
+                        <th width="15%">单价</th>
+                        <th width="15%">数量</th>
+                        <th width="15%">合计</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in order.orderProduct %}
+                    <tr>
+                        <td><img class="product-img" src="/upload/{{product.product.productUrl}}" alt="图片"></td>
+                        <td>
+                            <p>{{product.product.productName}}</p>
+                            <p>{{product.product.productDes}}</p>
+                        </td>
+                        <td>
+                            <p>{{product.product.productPrice}}</p>
+                        </td>
+                        <td>{{product.productNum}}</td>
+                        <td>￥{{product.totalPrice}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/js/admin.js"></script>
+
+</body>
+
+</html>

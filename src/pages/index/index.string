@@ -6,7 +6,14 @@
 			</a>
 		</div>
 		<div class="p-price-con">
+			{{#isDiscount}}
+			<s class="p-name">￥{{productPrice}} &nbsp;</s>
+			<span class="p-price">{{productDiscount}}折优惠</span>
+			<span class="p-price">现价{{productNowprice}}</span>
+			{{/isDiscount}}
+			{{^isDiscount}}
 			<span class="p-price">￥{{productPrice}}</span>
+			{{/isDiscount}}
 		</div>
 		<div class="p-name-con">
 			<a href="./detail.html?productId={{_id}}" class="p-name" target="_blank">{{productName}}</a>

@@ -136,14 +136,20 @@ var page={
 	loadCart:function(){//加载购物车列表
 		var _this=this;
 		_cart.getCartList(function(res){
-			_this.renderCart(res.data);
+			if (res.code==10) {
+				_mm.doLogin();
+			}else{
+				_this.renderCart(res.data);
+			}
+			
 		},function(err){
 			$('.page-wrap').html("<p class='errtips'>哪里不对，请重新刷新</p>")
 		})
 	},
 	renderCart:function(data){//购物车页面
 		this.filter(data);
-		console.log(data)
+		this.data.cartInfo = data;
+		console.log(this.data.cartInfo)
 		var CartHtml=_mm.renderHtml(template,data);
 		$('.page-wrap').html(CartHtml);
 		//修改导航条购物车数量
@@ -154,14 +160,13 @@ var page={
 		data.cartTotalPrice = 0;
 		data.allChecked = true;
 		data.cartList.forEach(function(item){
-			item.totalPrice = parseInt(item.product.productPrice) * item.productNum;
+			item.totalPrice = item.product.productNowprice * item.productNum;
 			if (!item.checked) {
 				data.allChecked = false;
 			} else {
 				data.cartTotalPrice += item.totalPrice;
 			}
 		});
-		console.log(data)
 	},
 
 }

@@ -1,0 +1,29 @@
+<table class="product-table">
+	<tr>
+		<th class="cell-img">&nbsp;</th>
+		<th class="cell-info">商品描述</th>
+		<th class="cell-price">价格</th>
+		<th class="cell-count">数量</th>
+		<th class="cell-total">小计</th>
+	</tr>
+	{{#productList}}
+	<tr>
+		<td  class="cell-img">
+			<a href="./detail.html?productId=" target="_blank">
+				<img class="p-img" src="../../../server/upload/{{product.productUrl}}" alt="{{product.productName}}">
+			</a>
+		</td>
+		<td class="cell-info">
+			<a href="./detail.html?productId={{product.productId}}" class="link" target="_blank">{{product.productName}}</a>
+		</td>
+		<td class="cell-price">￥{{product.productNowprice}}</td>
+		<td class="cell-count">{{productNum}}</td>
+		<td class="cell-total">￥{{totalPrice}}</td>
+	</tr>
+	{{/productList}}
+</table>
+<div class="submit">
+	<span>总价:</span>
+	<span class="submit-total">￥{{productTotalPrice}}</span>
+	<span class="btn submit-order">提交订单</span>
+</div>

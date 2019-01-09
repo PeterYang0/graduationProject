@@ -1,0 +1,5 @@
+<option value="test">选择分类</option>
+<option value="">所有商品</option>
+{{#cates}}
+<option value="{{_id}}">{{productCat}}</option>
+{{/cates}}

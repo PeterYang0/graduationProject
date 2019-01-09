@@ -8,7 +8,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 //html模板的配置
 var getHtmlConfig = function(name, title){
@@ -32,7 +31,11 @@ module.exports = {
     'user-register'   :   ['./src/pages/user-register/index.js'],
     'result'          :   ['./src/pages/result/index.js'],
     'detail'          :   ['./src/pages/detail/index.js'],
-    'cart'          :   ['./src/pages/cart/index.js'],
+    'cart'            :   ['./src/pages/cart/index.js'],
+    'order-confirm'   :   ['./src/pages/order-confirm/index.js'],
+    'order-list'      :   ['./src/pages/order-list/index.js'],
+    'payment'         :   ['./src/pages/payment/index.js'],
+    'order-detail'    :   ['./src/pages/order-detail/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -101,7 +104,10 @@ module.exports = {
         new HtmlWebpackPlugin(getHtmlConfig('result', '结果')),
         new HtmlWebpackPlugin(getHtmlConfig('detail', '商品详情')),
         new HtmlWebpackPlugin(getHtmlConfig('cart', '购物车')),
-
+        new HtmlWebpackPlugin(getHtmlConfig('order-confirm', '订单确认')),
+        new HtmlWebpackPlugin(getHtmlConfig('order-list', '订单列表')),
+        new HtmlWebpackPlugin(getHtmlConfig('payment', '支付')),
+        new HtmlWebpackPlugin(getHtmlConfig('order-detail', '订单详情')),
 	      //处理css文件
   		  new ExtractTextPlugin("css/[name].css"),
         //处理公共文件

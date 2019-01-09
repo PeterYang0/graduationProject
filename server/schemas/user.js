@@ -22,7 +22,6 @@ module.exports = new mongoose.Schema({
 		type:Boolean,
 		default:false
 	},
-	orderList:Array,
 	cartList:[
 		{
 			product:Object,
@@ -33,5 +32,15 @@ module.exports = new mongoose.Schema({
 			productNum:Number
 		}
 	],
-	adressList:Array
+	adressList:[
+		{
+			adressId: Number,
+			receiverName:String,
+			receiverPhone: Number,
+			receiverProvince: String,
+			receiverCity: String,
+			receiverAdress: String,
+			receiverZip: Number
+		}
+	]
 });

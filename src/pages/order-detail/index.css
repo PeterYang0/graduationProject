@@ -1,0 +1,48 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-19 17:14:59
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-19 19:24:38
+*/
+.order-list-table{
+	width: 100%;
+}
+.order-list-table.orderHeader{
+	background: #eee;
+}
+.order-list-table .cell{
+	padding:10px 0;
+	border-bottom: 1px solid #eee;
+	text-align: center;
+}
+.order-list-table .cell-img{
+	width: 10%;
+}
+.order-list-table .cell-img .p-img{
+	width: 80px;
+	height: 80px;
+}
+.order-list-table .cell-info{
+	width: 45%;
+	text-align: left;
+}
+.order-list-table .cell-price{
+	width: 15%;
+}
+.order-list-table .cell-count{
+	width: 15%;
+}
+.order-list-table .cell-total{
+	width: 15%;
+}
+.panel-body .order-info .info-line{
+	margin: 10px 0;
+}
+.panel-body .order-info .info-line .text{
+	font-size: 14px;
+	margin-right: 20px;
+}
+.panel-body .order-info .info-line .btn{
+	height: 40px;
+	line-height: 40px;
+}

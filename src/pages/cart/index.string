@@ -52,7 +52,7 @@
 				</a>
 			</th>
 			<th class="cart-cell cell-price">
-				￥{{product.productPrice}}
+				￥{{product.productNowprice}}
 			</th>
 			<th class="cart-cell cell-count">
 				<span class="count-btn minus">-</span>

@@ -12,7 +12,7 @@
 		<p class="p-subtitle">{{productDes}}</p>
 		<div class="p-info-item p-price-con">
 			<span class="label">价格</span>
-			<span class="info">￥{{productPrice}}</span>
+			<span class="info">￥{{productNowprice}}</span>
 		</div>
 		<div class="p-info-item">
 			<span class="label">库存</span>

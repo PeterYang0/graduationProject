@@ -13,6 +13,7 @@ var Product=require('../models/product');
 //商品分类库
 var ProductCat=require('../models/productCat');
 var User=require('../models/user');
+var Order = require('../models/order');
 
 /*图片上传模块  即可以获取form表单的数据 也可以实现上传图片*/
 var multiparty = require('multiparty'); 
@@ -34,15 +35,21 @@ router.use('/',function(req,res,next){
 router.get('/',function(req,res,next){
 	let productCount;
 	let userCount;
+	let orderCount;
 	Product.find().then(function(products){
 		productCount=products.length;
 		return User.find();
 	}).then(function(users){
 		userCount=users.length;
-		res.render('index',{
-			userInfo:req.userInfo,
-			userCount:userCount,
-			productCount:productCount,
+		return Order.find();
+		
+	}).then(function(orders){
+		orderCount=orders.length
+		res.render('index', {
+			userInfo: req.userInfo,
+			userCount: userCount,
+			productCount: productCount,
+			orderCount: orderCount
 		});
 	});
 });
@@ -98,7 +105,9 @@ router.post('/product/add',function(req,res){
         data.productStatus=fields.productStatus[0];
         data.productPrice=fields.productPrice[0];
         data.productCount=fields.productCount[0];
-        data.productUrl=files.pic[0].path;
+		data.productUrl=files.pic[0].path;
+		data.productDiscount=10;
+		data.productNowprice = data.productPrice * data.productDiscount/10;
         //保存数据
         new Product(data).save().then(function(){
             res.redirect('/admin/product'); /*上传成功跳转到首页*/
@@ -302,6 +311,154 @@ router.post('/deleteUser',function(req,res,next){
 		});
 	};
 	
+});
+//订单模块
+router.get('/order', function (req, res, next) {
+	let order = {};
+	let orderId = req.query.orderId;
+	let pageSize = req.query.pageSize * 1 ? req.query.pageSize * 1 : 10;
+	let current = req.query.current * 1 ? req.query.current * 1 : 1;
+	let skipCount = (current - 1) * pageSize;
+	let totalProduct;//总商品数
+	let totalPage;//总页数
+	//算出总商品数
+	Order.find().then(function (orders) {
+		totalOrder = orders.length;
+		totalPage = Math.ceil(totalOrder / pageSize);
+		//条件搜索
+		if (orderId) {
+			order.orderId = orderId;
+		};
+		return Order.where(order)
+			.limit(pageSize)
+			.skip(skipCount)
+	}).then(function (orders) {
+		orders.forEach((element,index) => {
+			orders[index].localeTime = new Date(element.orderCreateTime).toLocaleString();
+		});
+		res.render('order', {
+			userInfo: req.userInfo,
+			orders: orders,
+			current: current,
+			totalPage: totalPage
+		});
+	});
+});
+//订单详情---页面
+router.get('/order/orderDetail', function (req, res, next){
+	let orderId = req.query.orderId;
+	Order.findOne({
+		orderId:orderId
+	}).then(function(order){
+		order.localeTime = new Date(order.orderCreateTime).toLocaleString();
+		res.render('orderDetail', {
+			userInfo: req.userInfo,
+			order:order
+		})
+	});
+});
+
+//促销页面
+//访问admin根目录
+router.get('/', function (req, res, next) {
+	let productCount;
+	let userCount;
+	let orderCount;
+	Product.find().then(function (products) {
+		productCount = products.length;
+		return User.find();
+	}).then(function (users) {
+		userCount = users.length;
+		return Order.find();
+
+	}).then(function (orders) {
+		orderCount = orders.length
+		res.render('index', {
+			userInfo: req.userInfo,
+			userCount: userCount,
+			productCount: productCount,
+			orderCount: orderCount
+		});
+	});
+});
+//促销
+router.get('/discount', function (req, res, next) {
+	let product = {};
+	let name = req.query.productName;
+	let pageSize = req.query.pageSize * 1 ? req.query.pageSize * 1 : 4;
+	let current = req.query.current * 1 ? req.query.current * 1 : 1;
+	let skipCount = (current - 1) * pageSize;
+	let totalProduct;//总商品数
+	let totalPage;//总页数
+	//算出总商品数
+	Product.find().then(function (products) {
+		totalProduct = products.length;
+		totalPage = Math.ceil(totalProduct / pageSize);
+		//条件搜索
+		if (name) {
+			product.productName = { $regex: name };
+			current = 1;//不分页
+			pageSize = totalProduct;
+			totalPage = 1;
+			skipCount = 0;
+		};
+		return Product.where(product)
+			.limit(pageSize)
+			.skip(skipCount)
+			.populate(['productCat']);
+	}).then(function (products) {
+		res.render('discount', {
+			userInfo: req.userInfo,
+			products: products,
+			current: current,
+			totalPage: totalPage
+		});
+	});
+});
+
+//编辑折扣
+router.post('/editDiscount', function (req, res, next) {
+	let id = req.body.id;
+	let newDiscount = req.body.newDiscount;
+	Product.findOne({
+		_id: id
+	}).then(function (product) {
+		product.productDiscount = newDiscount;
+		product.productNowprice = product.productPrice*product.productDiscount/10;
+		product.save();
+		res.json({
+			code:0,
+			data:{
+				discount: newDiscount,
+				productNowprice: product.productNowprice
+			}
+		})
+	});
+});
+//促销
+router.get('/discountProduct', function (req, res, next) {
+	let pageSize = req.query.pageSize * 1 ? req.query.pageSize * 1 : 4;
+	let current = req.query.current * 1 ? req.query.current * 1 : 1;
+	let skipCount = (current - 1) * pageSize;
+	let totalProduct;//总商品数
+	let totalPage;//总页数
+	//算出总商品数
+	Product.find({ productDiscount: { $lt: 10 } }).then(function (products) {
+		totalProduct = products.length;
+		totalPage = Math.ceil(totalProduct / pageSize);
+		//条件搜索
+		return Product.find({ productDiscount: { $lt: 10 } })
+			.limit(pageSize)
+			.skip(skipCount)
+			.populate(['productCat']);
+	}).then(function (products) {
+		res.render('discountProduct', {
+			userInfo: req.userInfo,
+			products: products,
+			current: current,
+			totalPage: totalPage
+		});
+	});
 });
 
 module.exports=router;

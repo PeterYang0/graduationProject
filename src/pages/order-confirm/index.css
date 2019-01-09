@@ -1,0 +1,150 @@
+/*
+* @Author: 羊驼
+* @Date:   2018-05-17 16:05:45
+* @Last Modified by:   羊驼
+* @Last Modified time: 2018-05-18 11:16:05
+*/
+.adress-item,
+.adress-add{
+	margin:0 20px 20px 0;
+	width: 200px;
+	float: left;
+	border: 3px dashed #ccc;
+	padding: 5px 10px;
+	cursor: pointer;
+	color: #666;
+}
+.adress-item.active{
+	border: 3px dashed #c60023;
+}
+.adress-item:hover,
+.adress-add:hover{
+	background: #fafafa;
+}
+.adress-item:hover .adress-opera{
+	visibility: visible;
+}
+.adress-item .adress-title{
+	overflow: hidden;
+	border-bottom: 1px solid #ddd;
+	height: 20px;
+	line-height: 20px;
+}
+.adress-item .adress-detail{
+	margin-top: 5px;
+	height: 40px;
+	line-height: 20px;
+	overflow: hidden;
+}
+.adress-item .adress-opera{
+	text-align: right;
+	visibility: hidden;
+}
+.adress-item .link{
+	margin-right: 3px;
+}
+.adress-add{
+	text-align: center;
+	color: #ccc;
+	height: 83px;
+}
+.adress-add .fa{
+	font-size: 50px;
+	line-height: 60px;
+}
+.product-table{
+	width: 100%;
+}
+.product-table{
+	text-align: center;
+}
+.product-table th,
+.product-table td{
+	border-bottom: 1px solid #eee;
+	padding: 10px;
+}
+.product-table .cell-img{
+	width: 10%;
+}
+.product-table .cell-img .p-img{
+	width: 80px;
+	height: 80px;
+	border: 1px solid #ddd;
+}
+.product-table .cell-info{
+	width: 30%;
+	text-align: left;
+}
+.product-table .cell-price{
+	width: 30%;
+}
+.product-table .cell-count{
+
+}
+.product-table .cell-total{
+
+}
+.submit{
+	background: #eee;
+	text-align: right;
+}
+.submit .submit-total{
+	margin: 0 20px 0 10px;
+	font-size: 18px;
+	color: #c60023;
+	font-weight: bold;
+	vertical-align: middle;
+}
+.submit .submit-order{
+	height: 50px;
+	line-height: 50px;
+}
+/* 新增收货地址 */
+.panel .panel-title{
+	color: #000;
+	font-size: 16px;
+}
+.panel .panel-title .close{
+	float: right;
+	cursor: pointer;
+}
+.from{
+	margin-top: 20px;
+}
+.form .from-inline{
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 10px;
+}
+.form .from-inline .from-item{
+	padding: 5px 3px;
+	width: 150px;
+}
+.form .from-inline .label{
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+.form .from-inline #receiver-province,
+.form .from-inline #receiver-city{
+	width: 70px;
+	margin-right: 15px;
+}
+.module{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #eee;
+	/* rgba不兼容低版本的 加个background*/
+	background: rgba(0, 0, 0,0.4);
+	z-index: 10000;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1000000000000000000000000000;
+}
+.module .panel{
+	width: 500px;
+	margin: 100px auto;
+}

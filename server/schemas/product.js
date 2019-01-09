@@ -13,10 +13,14 @@ module.exports = new mongoose.Schema({
 	// 商品url
 	productUrl:String,
 	productPrice:Number,
+	productNowprice: Number,
+	//
+	productDiscount: {
+		type: Number,
+		default: 10
+	},
 	//上架状态
-	productStatus:Boolean,
-	//购物车中默认选中
-	productSclect:{
+	productStatus:{
 		type:Boolean,
 		default:true
 	},

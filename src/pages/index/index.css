@@ -118,3 +118,29 @@
     color: #666;
     text-decoration: none;
 }
+.catList .cateText{
+	background: #c60023;
+	border: 1px solid #c60023;
+	color: #fff;
+	position: relative;
+	padding: 5px 8px;
+	height: 24px;
+	line-height: 24px;
+	cursor: pointer;
+}
+.catList #cate{
+	padding: 4px 3px;
+	position: relative;
+	top:1px;
+}
+.catList .discountBtn{
+	float: right;
+	background: #c60023;
+	border: 1px solid #c60023;
+	color: #fff;
+	position: relative;
+	padding: 5px 8px;
+	height: 24px;
+	line-height: 24px;
+	cursor: pointer;
+}
