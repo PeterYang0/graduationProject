@@ -330,6 +330,7 @@ router.get('/order', function (req, res, next) {
 			order.orderId = orderId;
 		};
 		return Order.where(order)
+			.sort({'orderCreateTime':-1})
 			.limit(pageSize)
 			.skip(skipCount)
 	}).then(function (orders) {

@@ -1,3 +1,4 @@
+{{#NotEmpty}}
 <table class="order-list-table orderListHeader">
 	<tr>
 		<th class="cell cell-img">&nbsp;</th>
@@ -50,3 +51,10 @@
 	{{/orderProduct}}
 </table>
 {{/orderList}}
+{{/NotEmpty}}
+
+{{^NotEmpty}}
+<div class="errtips">
+	暂无订单
+</div>
+{{/NotEmpty}}

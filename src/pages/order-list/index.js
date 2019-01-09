@@ -32,9 +32,16 @@ var page={
 	    });
 	},
 	filter:function(data){
-		for(var i=0;i<data.orderList.length;i++){
-			data.orderList[i].orderCreateTime = new Date(data.orderList[i].orderCreateTime).toLocaleString();
+		console.log(data)
+		if (data.orderList.length==0) {
+			data.NotEmpty=false;
+		}else{
+			data.NotEmpty = true;
+			for (var i = 0; i < data.orderList.length; i++) {
+				data.orderList[i].orderCreateTime = new Date(data.orderList[i].orderCreateTime).toLocaleString();
+			}
 		}
+		
 	}
 };
 
