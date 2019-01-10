@@ -26,7 +26,6 @@ var page={
 		$(document).on('click','.cancel-btn',function(){
 			if (window.confirm('确认取消吗')) {
 				_order.cancelOrder(_this.data.DetailParam.orderNumber,function(res){
-					_mm.successTips(res);
 					_this.loadOrder();
 				},function(err){
 					_mm.errorTips(err);
@@ -39,7 +38,6 @@ var page={
 	    var orderDetailHtml = '';
 	    _order.getOrderDetail(this.data.DetailParam.orderNumber,function(res){
 			_this.dataFilter(res.data);
-			console.log(res)
 	        orderDetailHtml = _mm.renderHtml(template, res.data);
 	        $('.content').html(orderDetailHtml);
 	    }, function(errMsg){

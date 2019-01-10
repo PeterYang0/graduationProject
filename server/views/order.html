@@ -81,6 +81,7 @@
             <thead>
                 <tr>
                     <th>订单ID</th>
+                    <th>用户名</th>
                     <th>收件人</th>
                     <th>订单状态</th>
                     <th>订单总价</th>
@@ -92,6 +93,7 @@
                 {% for order in orders %}
                 <tr>
                     <td>{{order.orderId}}</td>
+                    <td>{{order.username}}</td>
                     <td>{{order.orderAdress.receiverName}}</td>
                     <td>{{order.orderStatusDec}}</td>
                     <td>{{order.orderTotalPrice}}</td>
