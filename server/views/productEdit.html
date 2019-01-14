@@ -86,7 +86,11 @@
                 <div class="col-sm-2">
                     <select name="productCat" id="productCat" class="form-control cat-select">
                         {% for productCat in productCats %}
+                        {% if product.productCat._id.toString()== productCat._id.toString()%}
+                        <option value="{{productCat._id.toString()}}" selected = "selected">{{productCat.productCat}}</option>
+                        {% else %}
                         <option value="{{productCat._id.toString()}}">{{productCat.productCat}}</option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                 </div>
@@ -95,8 +99,13 @@
                 <label for="productStatus" class="col-sm-2 control-label">上架状态</label>
                 <div class="col-sm-2">
                     <select name="productStatus" id="productStatus" class="form-control cat-select">
-                        <option value=true>上架</option>
+                        {% if product.productStatus== true %}
+                        <option value=true selected = "selected">上架</option>
                         <option value=false>下架</option>
+                        {% else %}
+                        <option value=true>上架</option>
+                        <option value=false selected = "selected">下架</option>
+                        {% endif %}
                     </select>
                 </div>
             </div>
