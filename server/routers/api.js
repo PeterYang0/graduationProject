@@ -300,52 +300,60 @@ router.get('/cart/count', function (req, res, next) {
 })
 //购物车，加入购物车
 router.get('/cart/add',function(req,res,next){
-    //获取商品id
-    var productId=req.query.productId;
-    var count=parseInt(req.query.count);
-    var productInfo;
-    User.findOne({
-        _id:req.userInfo._id
-    }).then(function(user){
-        user.cartList.forEach(function(element){
-            if(element.product&&element.product._id==productId){
-                element.productNum=parseInt(element.productNum)+count;
-                productInfo=element;
-            };
-        });
-        if(productInfo){
-            // console.log('在');
-            User.update({
-                _id:req.userInfo._id
-            },user).then(function(newdata){
-                res.json({
-                    code:0,
-                    msg:'加入购物车成功',
-                    data:newdata
-                })
+    if (req.userInfo.username) {
+        //获取商品id
+        var productId = req.query.productId;
+        var count = parseInt(req.query.count);
+        var productInfo;
+        User.findOne({
+            _id: req.userInfo._id
+        }).then(function (user) {
+            user.cartList.forEach(function (element) {
+                if (element.product && element.product._id == productId) {
+                    element.productNum = parseInt(element.productNum) + count;
+                    productInfo = element;
+                };
             });
-        }else{
-            // console.log('不在');
-            Product.findOne({
-                _id:productId
-            }).then(function(product){
-                product.productUrl=product.productUrl.substr(7)
-                user.cartList.push({
-                    product:product,
-                    checked:true,
-                    productNum:count
+            if (productInfo) {
+                // console.log('在');
+                User.update({
+                    _id: req.userInfo._id
+                }, user).then(function (newdata) {
+                    res.json({
+                        code: 0,
+                        msg: '加入购物车成功',
+                        data: newdata
+                    })
                 });
-                return User.update({
-                    _id:req.userInfo._id
-                },user)
-            }).then(function(){
-                res.json({
-                    code:0,
-                    msg:'加入购物车成功'
-                })
-            });
-        }
-    });
+            } else {
+                // console.log('不在');
+                Product.findOne({
+                    _id: productId
+                }).then(function (product) {
+                    product.productUrl = product.productUrl.substr(7)
+                    user.cartList.push({
+                        product: product,
+                        checked: true,
+                        productNum: count
+                    });
+                    return User.update({
+                        _id: req.userInfo._id
+                    }, user)
+                }).then(function () {
+                    res.json({
+                        code: 0,
+                        msg: '加入购物车成功'
+                    })
+                });
+            }
+        });
+    } else {
+        res.json({
+            code: 10,
+            msg: '未登录'
+        })
+    }
+    
 })
 //获取购物车列表
 router.get('/cart/cartlist',function(req,res,next){

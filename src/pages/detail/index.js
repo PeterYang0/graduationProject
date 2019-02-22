@@ -72,7 +72,11 @@ var page={
 				productId:_this.data.productId,
 				count:$('.p-count').val()*1
 			},function(res){
-				window.location.href='./result.html?type=cart-add';
+				if (res.code==10) {
+					_mm.doLogin();
+				}else{
+					window.location.href = './result.html?type=cart-add';
+				}
 			},function(err){
 				_mm.errorTips(err)
 			})
